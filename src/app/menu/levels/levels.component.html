@@ -1,0 +1,26 @@
+<div class="levels d-flex flex-column">
+    <app-back-button></app-back-button>
+
+    <div
+        class="
+            levels-body
+            d-flex
+            flex-column
+            align-items-center
+            justify-content-center
+        "
+    >
+        <div class="levels-box text-center">
+            <span>Qual nível você deseja jogar?</span>
+
+            <div class="options d-flex">
+                <div class="m-3 level" *ngFor="let option of options">
+                    <app-letter-button
+                        [label]="option"
+                        (onButtonClick)="onLevelClick($event)"
+                    ></app-letter-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
