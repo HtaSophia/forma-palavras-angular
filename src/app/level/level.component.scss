@@ -1,0 +1,43 @@
+.level {
+    height: 100%;
+
+    .buttons {
+        .coin {
+            span {
+                color: #f9dd16;
+                font-size: 24px;
+            }
+        }
+    }
+    .level-header {
+        flex: 1;
+
+        .level-completed {
+            span {
+                color: #f9dd16 !important;
+                font-size: 40px;
+                font-family: cursive;
+                -webkit-text-stroke: 1px black;
+
+                &:last-of-type {
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+
+    .level-body {
+        flex: 1;
+        position: relative;
+
+        .words {
+            max-height: 300px;
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 20px;
+            left: 500px;
+        }
+    }
+}
