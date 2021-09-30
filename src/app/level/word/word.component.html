@@ -1,0 +1,16 @@
+<div class="word d-flex">
+    <div class="letters d-flex" *ngIf="visible; else hide">
+        <div class="m-3 letter" *ngFor="let letter of wordSplit">
+            <app-letter-button
+                [label]="letter"
+                [clickable]="false"
+            ></app-letter-button>
+        </div>
+    </div>
+
+    <ng-template #hide>
+        <div class="m-3 letter" *ngFor="let letter of wordSplit">
+            <div class="empty"></div>
+        </div>
+    </ng-template>
+</div>
