@@ -1,0 +1,69 @@
+<div class="level d-flex flex-column">
+    <div class="buttons d-flex justify-content-between">
+        <app-back-button></app-back-button>
+
+        <div class="coin d-flex">
+            <img src="assets/images/coin.png" alt="Coin" width="40">
+            <span class="ps-2"><strong>{{ coins }}</strong></span>
+        </div>
+
+        <button class="btn custom-btn" (click)="onResetClick()">
+            <strong>APAGAR LETRAS</strong>
+        </button>
+    </div>
+
+    <div class="level-header">
+        <div
+            class="all-letters d-flex flex-column align-items-center"
+            *ngIf="
+                this.levels.wordsCompleted !== this.levelInfo.words.length;
+                else levelCompleted
+            "
+        >
+            <div class="letters d-flex">
+                <div
+                    class="m-3 letter"
+                    *ngFor="let letter of levelInfo.letters"
+                >
+                    <app-letter-button
+                        [label]="letter"
+                        (onButtonClick)="onLetterClick($event)"
+                    ></app-letter-button>
+                </div>
+            </div>
+
+            <div class="letters-selected d-flex">
+                <div class="m-3 letter" *ngFor="let letter of lettersSelected">
+                    <app-letter-button
+                        [id]="letter"
+                        [label]="letter"
+                        [clickable]="false"
+                        (onButtonClick)="onLetterClick($event)"
+                    ></app-letter-button>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #levelCompleted>
+            <div class="level-completed d-flex flex-column align-items-center">
+                <span class="mt-5">PARABÉNS</span>
+                <span>VOCÊ COMPLETOU TODAS AS PALAVRAS</span>
+            </div>
+        </ng-template>
+    </div>
+
+    <div class="level-body">
+        <div class="words d-flex flex-column flex-wrap align-content-between">
+            <div class="word" *ngFor="let word of levelInfo.words">
+                <app-word
+                    [word]="word.value"
+                    [visible]="word.visible"
+                ></app-word>
+            </div>
+        </div>
+
+        <div class="hint">
+            <app-hint [hints]="levelInfo.hints" [coins]="coins" (hintEvent)="onHintClick()"></app-hint>
+        </div>
+    </div>
+</div>
