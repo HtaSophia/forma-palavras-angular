@@ -1,0 +1,13 @@
+// Buttons Style
+.custom-btn {
+    color: white !important;
+    font-size: 18px !important;
+    background-color: #f9dd16 !important;
+    border-radius: 30px !important;
+    box-shadow: 0px 0px 5px #f0ff07 !important;
+
+    &:hover {
+        color: #f9dd16 !important;
+        background-color: white !important;
+    }
+}
