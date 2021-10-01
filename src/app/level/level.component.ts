@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LevelService } from './level.service';
 import { Level } from './types/level';
 
@@ -17,24 +17,30 @@ export class LevelComponent implements OnInit {
 
     public levelInfo: Level;
 
+    public hints: string[] = [];
+
     public lettersSelected = [];
 
     public coins = 0;
 
     constructor(
-        private readonly route: ActivatedRoute,
+        private readonly activatedRoute: ActivatedRoute,
+        private readonly route: Router,
         private readonly levelService: LevelService
     ) {}
 
     public ngOnInit(): void {
-        const level = this.route.snapshot.queryParams.id as number;
-        this.levelInfo = this.levelService.getLevelInfo(level || 1);
+        const level = this.activatedRoute.snapshot.queryParams.id as number;
+
+        this.levels.current = level || 1;
+        this.levelInfo = this.levelService.getLevelInfo(this.levels.current);
+        this.hints = this.levelInfo.words.map((word) => word.hint);
 
         this.coins = this.levelService.coinsValue;
     }
 
     public onLetterClick(letterSelected: string): void {
-        if (this.lettersSelected.length < this.levelInfo.maxLetters) {
+        if (this.lettersSelected.length <= this.levelInfo.maxLetters) {
             this.lettersSelected.push(letterSelected);
             this.checkWord(this.lettersSelected.join(''));
         }
@@ -53,6 +59,10 @@ export class LevelComponent implements OnInit {
             wordCompleted.visible = true;
             this.levels.wordsCompleted++;
 
+            this.hints = this.levelInfo.words
+                .filter((wd) => !wd.visible && this.hints.includes(wd.hint))
+                .map((wd) => wd.hint);
+
             if (
                 this.levels.wordsCompleted === this.levelInfo.words.length &&
                 this.levels.current < this.levels.total
@@ -64,7 +74,14 @@ export class LevelComponent implements OnInit {
                     this.levelInfo = this.levelService.getLevelInfo(
                         this.levels.current
                     );
+                    this.hints = this.levelInfo.words.map((wd) => wd.hint);
                 }, 10_000);
+            } else if (
+                this.levels.wordsCompleted === this.levelInfo.words.length
+            ) {
+                setTimeout(() => {
+                    void this.route.navigate(['menu']);
+                }, 5000);
             }
         }
     }

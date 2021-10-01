@@ -38,7 +38,6 @@
                         [id]="letter"
                         [label]="letter"
                         [clickable]="false"
-                        (onButtonClick)="onLetterClick($event)"
                     ></app-letter-button>
                 </div>
             </div>
@@ -58,12 +57,13 @@
                 <app-word
                     [word]="word.value"
                     [visible]="word.visible"
+                    [showLettersQuantity]="levels.current < levels.total"
                 ></app-word>
             </div>
         </div>
 
         <div class="hint">
-            <app-hint [hints]="levelInfo.hints" [coins]="coins" (hintEvent)="onHintClick()"></app-hint>
+            <app-hint [hints]="hints" [coins]="coins" (hintEvent)="onHintClick()"></app-hint>
         </div>
     </div>
 </div>
