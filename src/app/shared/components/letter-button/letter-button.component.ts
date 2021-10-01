@@ -18,9 +18,11 @@ export class LetterButtonComponent implements OnInit {
     public backgroundColor: string;
 
     public ngOnInit(): void {
-        this.backgroundColor = `#${Math.floor(
-            Math.random() * 16_777_215
-        ).toString(16)}`;
+        this.backgroundColor = `rgb(${Math.floor(
+            Math.random() * 200
+        )},${Math.floor(Math.random() * 200)},${Math.floor(
+            Math.random() * 200
+        )})`;
     }
 
     public onClick(): void {
