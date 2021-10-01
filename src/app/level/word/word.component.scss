@@ -3,6 +3,19 @@
         background-color: #2d2677;
         height: 59px;
         width: 60px;
-        border-radius: .25rem;
+        border-radius: 0.25rem;
+    }
+
+    &.no-show-letters {
+        .letter {
+            margin: 0 0 1rem 2px !important;
+        }
+
+        .box-without-quantity {
+            background-color: #2d2677;
+            height: 59px;
+            width: 370px;
+            border-radius: 0.25rem;
+        }
     }
 }

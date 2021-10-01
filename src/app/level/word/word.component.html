@@ -1,4 +1,4 @@
-<div class="word d-flex">
+<div class="word d-flex" [ngClass]="{'no-show-letters': !showLettersQuantity}">
     <div class="letters d-flex" *ngIf="visible; else hide">
         <div class="m-3 letter" *ngFor="let letter of wordSplit">
             <app-letter-button
@@ -9,8 +9,14 @@
     </div>
 
     <ng-template #hide>
-        <div class="m-3 letter" *ngFor="let letter of wordSplit">
-            <div class="empty"></div>
+        <div *ngIf="showLettersQuantity; else noLettersQuantity" class="d-flex">
+            <div class="m-3 letter" *ngFor="let letter of wordSplit">
+                <div class="empty"></div>
+            </div>
         </div>
+
+        <ng-template #noLettersQuantity>
+            <div class="box-without-quantity mb-3"></div>
+        </ng-template>
     </ng-template>
 </div>

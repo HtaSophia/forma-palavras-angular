@@ -12,6 +12,9 @@ export class WordComponent implements OnInit {
     @Input()
     public visible = false;
 
+    @Input()
+    public showLettersQuantity = false;
+
     public wordSplit: string[];
 
     public ngOnInit(): void {
