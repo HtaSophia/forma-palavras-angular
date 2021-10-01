@@ -1,6 +1,5 @@
 export interface Level {
     maxLetters: number;
     letters: string[];
-    words: { visible: boolean; value: string }[];
-    hints: string[];
+    words: { visible: boolean; value: string; hint: string }[];
 }
